@@ -1,0 +1,86 @@
+{
+  "Create Next Component": {
+    "prefix": "nfce",
+    "body": [
+      "interface ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}Props {}",
+      "",
+      "function ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}Props) {",
+      "\treturn <div>${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}</div>",
+      "}",
+      "",
+      "export { ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/} }"
+    ],
+    "description": "기본 컴포넌트"
+  },
+  "Next Page Component": {
+    "prefix": "npc",
+    "body": [
+      "function ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}Page () {",
+      "\treturn (",
+      "\t\t<div>",
+      "\t\t\t$2",
+      "\t\t</div>",
+      "\t)",
+      "}",
+      "",
+      "export default ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}"
+    ],
+    "description": "함수형 페이지 컴포넌트"
+  },
+  "Next Page Component With Params": {
+    "prefix": "npcwp",
+    "body": [
+      "interface ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}PageProps {",
+      "\tparams: {",
+      "\t\t${2:paramName}: string",
+      "\t}",
+      "}",
+      "",
+      "export default function ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}Page({",
+      "\tparams",
+      "}: I${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}Page) {",
+      "\tconst { ${2:paramName} } = params",
+      "",
+      "\treturn <div>${3:content}/div>",
+      "}"
+    ],
+
+    "description": "매개변수가 존재하는 함수형 페이지 컴포넌트"
+  },
+
+  "Next Layout Component": {
+    "prefix": "nlc",
+    "body": [
+      "interface ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}LayoutProps {",
+      "\tchildren: React.ReactNode",
+      "}",
+      "",
+      "export default function ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}Layout({",
+      "\tchildren",
+      "}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({}: ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}LayoutProps) {",
+      "\treturn <div>{children}</div>",
+      "}"
+    ],
+    "description": "함수형 레이아웃 컴포넌트"
+  },
+  "React Component With Props": {
+    "prefix": "rcwp",
+    "body": [
+      "\"use client\"",
+      "",
+      "interface I${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/} {",
+      "\t${1:propName}: ${2:string}",
+      "}",
+      "",
+      "function ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}({",
+      "\t${1:propName}",
+      "}: I${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/}) {",
+      "\treturn <div>$3</div>",
+      "}",
+      "",
+      "export { ${TM_FILENAME_BASE/(\\w+(-\\w+)*)(\\.tsx)?$/${1:/pascalcase}/} }"
+    ],
+
+    "description": "속성이 있는 일반 함수형 컴포넌트"
+  }
+}

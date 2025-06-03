@@ -1,0 +1,28 @@
+{
+	"Admin generated model": {
+		"prefix": "agm",
+		"body": [
+			"model $1 {",
+			"  id        Int   @id @default(autoincrement())",
+			"  createdAt DateTime @default(now()) @map(\"created_at\") @db.Timestamptz(6)",
+			"  updatedAt DateTime @default(now()) @updatedAt @map(\"updated_at\") @db.Timestamptz(6)",
+			"  ",
+			"  $2",
+			"}"
+		],
+		"description": "어드민에서 직접 작성되는 데이터 테이블 생성"
+	},
+	"User generated model": {
+		"prefix": "ugm",
+		"body": [
+			"model $1 {",
+			"  id        String   @id @default(cuid())",
+			"  createdAt DateTime @default(now()) @map(\"created_at\") @db.Timestamptz(6)",
+			"  updatedAt DateTime @updatedAt @map(\"updated_at\") @db.Timestamptz(6)",
+			"  ",
+			"  $2",
+			"}"
+		],
+		"description": "유저 액션을 통해 생성되는 데이터 테이블 생성"
+	}
+}

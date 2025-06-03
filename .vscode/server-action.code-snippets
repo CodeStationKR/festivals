@@ -1,0 +1,30 @@
+{
+	// 전체 서버액션 생성
+	"create new server action": {
+		"prefix": "cnsa",
+		"body": [
+			"\"use server\";",
+			"",
+			"async function $1Action($4) {",
+			"\tconst response = await $2Service.$3($4);",
+			"\treturn response;",
+			"}",
+			"",
+			"export { $1Action };"
+		],
+
+		"description": "create new server action"
+	},
+
+	// 서버액션 조각 생성
+	"create server action snippet": {
+		"prefix": "csas",
+		"body": [
+			"async function $1:Action($4) {",
+			"\tconst response = await $2Service.$3($4);",
+			"\treturn response;",
+			"}"
+		],
+		"description": "create server action snippet"
+	}
+}

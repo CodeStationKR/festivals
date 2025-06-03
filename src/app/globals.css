@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-50: 270 100% 98%;
+    --brand-100: 269 100% 95%;
+    --brand-200: 269 100% 92%;
+    --brand-300: 269 97% 85%;
+    --brand-400: 270 95% 75%;
+    --brand-500: 271 91% 65%;
+    --brand-600: 271 81% 56%;
+    --brand-700: 272 72% 47%;
+    --brand-800: 273 67% 39%;
+    --brand-900: 274 66% 32%;
+
+    --base-50: 0 0% 98%;
+    --base-100: 0 0% 96%;
+    --base-200: 0 0% 90%;
+    --base-300: 0 0% 84%;
+    --base-400: 0 0% 64%;
+    --base-500: 0 0% 45%;
+    --base-600: 0 0% 32%;
+    --base-700: 0 0% 25%;
+    --base-800: 0 0% 15%;
+    --base-900: 0 0% 9%;
+
+    --base-white: 0 0% 100%;
+    --base-black: 0 0% 0%;
+
+    --red-50: 0 86% 97%;
+    --red-400: 0 91% 71%;
+    --red-500: 0 84% 60%;
+    --red-600: 0 72% 51%;
+
+    --background: var(--base-50);
+    --foreground: var(--base-900);
+
+    --primary: var(--brand-500);
+    --primary-foreground: var(--base-50);
+
+    --muted: var(--base-100);
+    --muted-foreground: var(--base-500);
+
+    --destructive: var(--red-500);
+    --destructive-foreground: var(--base-white);
+
+    --border: var(--base-200);
+    --input: var(--base-200);
+    --ring: var(--base-400);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: var(--base-900);
+    --foreground: var(--base-50);
+
+    --primary: var(--brand-50);
+    --primary-foreground: var(--brand-500);
+
+    --muted: var(--base-800);
+    --muted-foreground: var(--base-400);
+
+    --destructive: var(--red-50);
+    --destructive-foreground: var(--red-600);
+
+    --border: var(--base-600);
+    --input: var(--base-700);
+    --ring: var(--brand-400);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    @apply font-pretendard;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
