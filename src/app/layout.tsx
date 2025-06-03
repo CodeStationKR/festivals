@@ -29,10 +29,8 @@ export default function RootLayout({
     <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
       <body className={pretendard.className}>
         <Providers>
-          <Header />
           <main>{children}</main>
           <Toaster />
-          <Footer />
           <Loading />
           <GlobalAlertDialog />
         </Providers>
