@@ -6,6 +6,7 @@
     "prettier",
     "plugin:prettier/recommended"
   ],
+  "ignorePatterns": ["/src/generated"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
