@@ -17,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
+import { Heart, RefreshCw } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
@@ -30,7 +30,7 @@ type Festival = {
   description: string;
   imageUrl: string;
   likes: number;
-  created_at: string;
+  createdAt: string;
 };
 
 // Initialize Supabase client
@@ -45,6 +45,7 @@ export default function DashboardPage() {
     null
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -160,6 +161,25 @@ export default function DashboardPage() {
     }
   };
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      await fetchFestivals();
+      toast({
+        title: "Refreshed",
+        description: "Festival data has been updated.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to refresh data. Please try again.",
+      });
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="container py-10">
@@ -200,7 +220,7 @@ export default function DashboardPage() {
             </CardContent>
             <CardFooter className="flex justify-between">
               <div className="text-sm text-muted-foreground">
-                {new Date(festival.created_at).toLocaleDateString()}
+                {new Date(festival.createdAt).toLocaleDateString()}
               </div>
               <Button
                 variant="ghost"
@@ -217,6 +237,19 @@ export default function DashboardPage() {
           </Card>
         ))}
       </div>
+
+      {/* Floating Refresh Button */}
+      <Button
+        variant="secondary"
+        size="icon"
+        className="fixed bottom-8 right-8 h-14 w-14 rounded-full shadow-lg transition-transform hover:scale-110"
+        onClick={handleRefresh}
+        disabled={isRefreshing}
+      >
+        <RefreshCw
+          className={`h-6 w-6 ${isRefreshing ? "animate-spin" : ""}`}
+        />
+      </Button>
 
       <Dialog
         open={!!selectedFestival}
@@ -244,7 +277,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex items-center justify-between">
                 <div className="text-sm text-muted-foreground">
-                  {new Date(selectedFestival.created_at).toLocaleDateString()}
+                  {new Date(selectedFestival.createdAt).toLocaleDateString()}
                 </div>
                 <Button
                   variant="ghost"
