@@ -112,7 +112,7 @@ export default function DashboardPage() {
       const { data, error } = await supabase
         .from("festivals")
         .select("*")
-        .order(sortBy === "date" ? "created_at" : "likes", {
+        .order(sortBy === "date" ? "createdAt" : "likes", {
           ascending: false,
         });
 
