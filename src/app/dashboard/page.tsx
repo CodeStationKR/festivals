@@ -17,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Heart, RefreshCw } from "lucide-react";
+import { Heart, RefreshCw, Clock, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
@@ -33,6 +33,8 @@ type Festival = {
   createdAt: string;
 };
 
+type SortOption = "date" | "likes";
+
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -46,6 +48,7 @@ export default function DashboardPage() {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [sortBy, setSortBy] = useState<SortOption>("date");
   const router = useRouter();
 
   useEffect(() => {
@@ -109,7 +112,9 @@ export default function DashboardPage() {
       const { data, error } = await supabase
         .from("festivals")
         .select("*")
-        .order("createdAt", { ascending: false });
+        .order(sortBy === "date" ? "created_at" : "likes", {
+          ascending: false,
+        });
 
       if (error) throw error;
       setFestivals(data || []);
@@ -124,6 +129,10 @@ export default function DashboardPage() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchFestivals();
+  }, [sortBy]); // Refetch when sort option changes
 
   const handleLike = async (festivalId: string) => {
     try {
@@ -180,6 +189,10 @@ export default function DashboardPage() {
     }
   };
 
+  const toggleSort = () => {
+    setSortBy((prev) => (prev === "date" ? "likes" : "date"));
+  };
+
   if (isLoading) {
     return (
       <div className="container py-10">
@@ -193,7 +206,27 @@ export default function DashboardPage() {
   return (
     <div className="container py-10">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight">Festival Booths</h1>
+        <div className="flex items-center gap-4">
+          <h1 className="text-3xl font-bold tracking-tight">Festival Booths</h1>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleSort}
+            className="flex items-center gap-2"
+          >
+            {sortBy === "date" ? (
+              <>
+                <Clock className="h-4 w-4" />
+                Sort by Date
+              </>
+            ) : (
+              <>
+                <ThumbsUp className="h-4 w-4" />
+                Sort by Likes
+              </>
+            )}
+          </Button>
+        </div>
         <Button onClick={() => router.push("/upload")}>Create New Booth</Button>
       </div>
 
